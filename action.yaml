@@ -1,0 +1,36 @@
+name: update coder template
+description: An action to deploy changes to your coder template automatically
+author: "Muhammad Atif Ali <matifali@live.com>"
+
+branding:
+  icon: arrow-up-circle
+  color: green
+
+# specify the inputs that this action accepts
+inputs:
+  CODER_TEMPLATE_NAME:
+    description: "Template name"
+    required: true
+  CODER_URL:
+    description: "Coder URL (e.g. https://coder.example.com)"
+    required: true
+  CODER_SESSION_TOKEN:
+    description: "Coder session token"
+    required: true
+  CODER_TEMPLATE_DIR:
+    description: "Template directory name defaults to TEMPLATE_NAME"
+    required: false
+  CODER_TEMPLATE_VERSION:
+    description: "Template version"
+    required: false
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  env:
+    CODER_SESSION_TOKEN: ${{ inputs.CODER_SESSION_TOKEN }}
+    CODER_URL: ${{ inputs.CODER_URL }}
+    CODER_TEMPLATE_NAME: ${{ inputs.CODER_TEMPLATE_NAME }}
+    CODER_TEMPLATE_DIR: ${{ inputs.CODER_TEMPLATE_DIR }}
+    CODER_TEMPLATE_VERSION: ${{ inputs.CODER_TEMPLATE_VERSION }}
