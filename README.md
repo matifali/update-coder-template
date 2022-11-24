@@ -11,10 +11,10 @@ Update coder templates automatically
 
 | Name | Description | Default |
 | ---- | ----------- | ------- |
-| `CODER_URL` | **Required** The url of coder (e.g. <https://dev.coder.com>). |-|
+| `CODER_URL` | **Required** The url of coder (e.g. <https://dev.coder.com>). | - |
 | `CODER_TEMPLATE_NAME` | **Required** The name of template. | - |
 | `CODER_TEMPLATE_DIR` | The directory of template. |`CODER_TEMPLATE_NAME`|
-| `CODER_TEMPLATE_VERSION` | The version of template. | `latest` |
+| `CODER_TEMPLATE_VERSION` | The version of template. | - |
 | `CODER_SESSION_TOKEN` | **Required** The session token of coder. | `secrets.CODER_SESSION_TOKEN` |
 
 ## Example
