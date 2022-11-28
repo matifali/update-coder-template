@@ -10,6 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: update coder template
-        run: gh release create ${{ github.ref }} -t ${{ github.ref }} -n ${{ github.ref }} -R ${{ github.repository }} -p
+        run: gh release create ${{ github.ref }} -t ${{ github.ref }} -n ${{ github.ref }} -R ${{ github.repository }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
