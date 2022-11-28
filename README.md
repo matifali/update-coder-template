@@ -1,4 +1,4 @@
-# Update Coder[https://coder.com] Template
+# Update [Coder](https://coder.com) Template
 
 Update coder templates automatically
 
