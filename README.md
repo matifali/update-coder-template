@@ -38,7 +38,7 @@ jobs:
           run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
 
         - name: Update Coder Template
-            uses: matifali/update-coder-template@v1
+            uses: matifali/update-coder-template@latest
             with:
                 CODER_TEMPLATE_NAME: "my-template"
                 CODER_TEMPLATE_DIR: "my-template"
