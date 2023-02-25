@@ -11,4 +11,10 @@ if [ -z "${CODER_TEMPLATE_DIR}" ]; then
     CODER_TEMPLATE_DIR="${CODER_TEMPLATE_NAME}"
 fi
 
-coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR} --url ${CODER_URL} --name ${CODER_TEMPLATE_VERSION} --yes
+# if the CODER_TEMPLATE_VERSION is empty string then let coder use a random name
+if [ -z "${CODER_TEMPLATE_VERSION}" ];
+then
+    coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR} --url ${CODER_URL} --yes
+else
+    coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR} --url ${CODER_URL} --name ${CODER_TEMPLATE_VERSION} --yes
+fi
