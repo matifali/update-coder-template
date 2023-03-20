@@ -25,7 +25,7 @@ name: Update Coder Template
 on:
   push:
     branches:
-      - master
+      - main
     
 jobs:
     update:
