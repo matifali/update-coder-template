@@ -5,7 +5,7 @@ Update coder templates automatically
 ## Usage
 
 1. Create a github secret named `CODER_SESSION_TOKEN` with your coder session token
-2. create .github/workflows/ci.yml directory and file locally. Copy and paste the configuration from below, replacing the value as needed.
+2. create .github/workflows/ci.yml directory and file locally. Copy and paste the configuration from below, replacing the values as needed.
 
 ## Inputs
 
