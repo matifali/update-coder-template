@@ -11,18 +11,22 @@ inputs:
   CODER_TEMPLATE_NAME:
     description: "Template name"
     required: true
-  CODER_URL:
-    description: "Coder URL (e.g. https://coder.example.com)"
+  CODER_ACCESS_URL:
+    description: "Coder access URL (e.g. https://coder.example.com)"
     required: true
   CODER_SESSION_TOKEN:
     description: "Coder session token"
     required: true
   CODER_TEMPLATE_DIR:
-    description: "Template directory name defaults to TEMPLATE_NAME"
+    description: "Template directory name (path to the directory containing the main.tf file default: TEMPLATE_NAME)"
     required: false
   CODER_TEMPLATE_VERSION:
     description: "Template version"
     required: false
+  CODER_TEMPLATE_ACTIVATE:
+    description: "Makes the current template active"
+    required: false
+    default: "true"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 runs:
@@ -34,3 +38,4 @@ runs:
     CODER_TEMPLATE_NAME: ${{ inputs.CODER_TEMPLATE_NAME }}
     CODER_TEMPLATE_DIR: ${{ inputs.CODER_TEMPLATE_DIR }}
     CODER_TEMPLATE_VERSION: ${{ inputs.CODER_TEMPLATE_VERSION }}
+    CODER_TEMPLATE_MAKE_ACTIVE: ${{ inputs.CODER_TEMPLATE_MAKE_ACTIVE }}
