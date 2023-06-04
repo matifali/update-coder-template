@@ -1,41 +1,36 @@
 #!/bin/bash -l
 set -e
 
-# Check if CODER_SESSION_TOKEN is set
+# Check if required variables are set
 : "${CODER_SESSION_TOKEN:?Variable not set or empty}"
+echo "CODER_SESSION_TOKEN is set."
 
-# Check if CODER_ACCESS_URL is set
 : "${CODER_ACCESS_URL:?Variable not set or empty}"
+echo "CODER_ACCESS_URL is set."
 
 echo "Pushing ${CODER_TEMPLATE_NAME} to ${CODER_ACCESS_URL}..."
 
-# if the CODRR_TEMPLATE_DIR is empty string, then use the TEMPLATE_NAME as the directory
-if [ -z "${CODER_TEMPLATE_DIR}" ]; then
-    CODER_TEMPLATE_DIR="${CODER_TEMPLATE_NAME}"
+# Set default values if variables are empty
+CODER_TEMPLATE_DIR=${CODER_TEMPLATE_DIR:-$CODER_TEMPLATE_NAME}
+echo "CODER_TEMPLATE_DIR is set to ${CODER_TEMPLATE_DIR}"
+
+# Construct push command
+push_command="coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR}"
+
+# Add version to the push command if specified
+if [ -n "${CODER_TEMPLATE_VERSION}" ]; then
+  push_command+=" --name ${CODER_TEMPLATE_VERSION}"
 fi
 
-# if the CODER_TEMPLATE_VERSION is empty string then let coder use a random name
-if [ -z "${CODER_TEMPLATE_VERSION}" ];
-then
-    echo "No version specified, using random name."
-    if [ -z "${CODER_TEMPLATE_ACTIVATE}" ];
-    then
-        coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR} --yes
-    else
-        coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR} --activate=${CODER_TEMPLATE_ACTIVATE} --yes
-    fi
-else
-    if [ -z "${CODER_TEMPLATE_ACTIVATE}" ];
-    then
-        coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR} --name ${CODER_TEMPLATE_VERSION} --yes
-    else
-        coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR} --name ${CODER_TEMPLATE_VERSION} --activate=${CODER_TEMPLATE_ACTIVATE} --yes
-    fi
+# Add activate flag to the push command if specified
+if [ -n "${CODER_TEMPLATE_ACTIVATE}" ]; then
+  push_command+=" --activate=${CODER_TEMPLATE_ACTIVATE}"
 fi
 
-if [ "${CODER_TEMPLATE_ACTIVATE}" == "true" ];
-then
-    echo "Template ${CODER_TEMPLATE_NAME} pushed to ${CODER_ACCESS_URL} and activated."
-else
-    echo "Template ${CODER_TEMPLATE_NAME} pushed to ${CODER_ACCESS_URL}.
-fi
+# Add confirmation flag to the push command
+push_command+=" --yes"
+
+# Execute the push command
+${push_command}
+
+echo "Template ${CODER_TEMPLATE_NAME} pushed to ${CODER_ACCESS_URL}."
