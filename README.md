@@ -9,41 +9,70 @@ Update coder templates automatically
 
 ## Inputs
 
-| Name | Description | Default |
-| ---- | ----------- | ------- |
-| `CODER_URL` | **Required** The url of coder (e.g. <https://dev.coder.com>). | - |
-| `CODER_TEMPLATE_NAME` | **Required** The name of template. | - |
-| `CODER_TEMPLATE_DIR` | The directory of template. |`CODER_TEMPLATE_NAME`|
-| `CODER_TEMPLATE_VERSION` | The version of template. | - |
-| `CODER_SESSION_TOKEN` | **Required** The session token of coder. | `secrets.CODER_SESSION_TOKEN` |
+| Name                      | Description                                                              | Default                       |
+| ------------------------- | ------------------------------------------------------------------------ | ----------------------------- |
+| `CODER_ACCESS_URL`        | **Required** The url of coder deployment (e.g. <https://dev.coder.com>). | -                             |
+| `CODER_SESSION_TOKEN`     | **Required** The session token of coder.                                 | `secrets.CODER_SESSION_TOKEN` |
+| `CODER_TEMPLATE_NAME`     | **Required** The name of template.                                       | -                             |
+| `CODER_TEMPLATE_DIR`      | The directory of template.                                               | `CODER_TEMPLATE_NAME`         |
+| `CODER_TEMPLATE_VERSION`  | The version of template.                                                 | -                             |
+| `CODER_TEMPLATE_ACTIVATE` | Activate the template after update.                                      | `true`                        |
 
-## Example
+## Examples
 
-```yaml
-name: Update Coder Template
+1. Update template with latest commit hash as version and activate it.
 
-on:
-  push:
-    branches:
-      - main
-    
-jobs:
-    update:
-        runs-on: ubuntu-latest
-        steps:
-        - name: Checkout
-          uses: actions/checkout@v3
-        - name: Get latest commit hash
-          id: latest_commit
-          run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
+   ```yaml
+   name: Update Coder Template
 
-        - name: Update Coder Template
-            uses: matifali/update-coder-template@latest
-            with:
-                CODER_TEMPLATE_NAME: "my-template"
-                CODER_TEMPLATE_DIR: "my-template"
-                CODER_URL: "https://dev.coder.com"
-                CODER_TEMPLATE_VERSION: "${{ steps.latest_commit.outputs.hash }}"
-                CODER_SESSION_TOKEN: ${{ secrets.CODER_SESSION_TOKEN }}
+   on:
+     push:
+       branches:
+         - main
 
-```
+   jobs:
+       update:
+           runs-on: ubuntu-latest
+           steps:
+           - name: Checkout
+             uses: actions/checkout@v3
+           - name: Get latest commit hash
+             id: latest_commit
+             run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
+
+           - name: Update Coder Template
+               uses: matifali/update-coder-template@latest
+               with:
+                   CODER_TEMPLATE_NAME: "my-template"
+                   CODER_TEMPLATE_DIR: "my-template"
+                   CODER_ACCESS_URL: "https://coder.example.com"
+                   CODER_TEMPLATE_VERSION: "${{ steps.latest_commit.outputs.hash }}"
+                   CODER_SESSION_TOKEN: ${{ secrets.CODER_SESSION_TOKEN }}
+   ```
+
+2. Update template with a random version name and don't activate it.
+
+   ```yaml
+   name: Update Coder Template
+
+   on:
+     push:
+       branches:
+         - main
+
+   jobs:
+       update:
+           runs-on: ubuntu-latest
+           steps:
+           - name: Checkout
+             uses: actions/checkout@v3
+
+           - name: Update Coder Template
+               uses: matifali/update-coder-template@latest
+               with:
+                   CODER_TEMPLATE_NAME: "my-template"
+                   CODER_TEMPLATE_DIR: "my-template"
+                   CODER_ACCESS_URL: "https://coder.example.com"
+                   CODER_TEMPLATE_ACTIVATE: "false"
+                   CODER_SESSION_TOKEN: ${{ secrets.CODER_SESSION_TOKEN }}
+   ```

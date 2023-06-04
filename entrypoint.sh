@@ -18,9 +18,19 @@ fi
 if [ -z "${CODER_TEMPLATE_VERSION}" ];
 then
     echo "No version specified, using random name."
-    coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR} --activate=${CODER_TEMPLATE_ACTIVATE} --yes
+    if [ -z "${CODER_TEMPLATE_ACTIVATE}" ];
+    then
+        coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR} --yes
+    else
+        coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR} --activate=${CODER_TEMPLATE_ACTIVATE} --yes
+    fi
 else
-    coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR} --name ${CODER_TEMPLATE_VERSION} --activate=${CODER_TEMPLATE_ACTIVATE} --yes
+    if [ -z "${CODER_TEMPLATE_ACTIVATE}" ];
+    then
+        coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR} --name ${CODER_TEMPLATE_VERSION} --yes
+    else
+        coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR} --name ${CODER_TEMPLATE_VERSION} --activate=${CODER_TEMPLATE_ACTIVATE} --yes
+    fi
 fi
 
 if [ "${CODER_TEMPLATE_ACTIVATE}" == "true" ];
