@@ -22,9 +22,9 @@ if [ -n "${CODER_TEMPLATE_VERSION}" ]; then
   push_command+=" --name ${CODER_TEMPLATE_VERSION}"
 fi
 
-# Add activate flag to the push command if specified
-if [ -n "${CODER_TEMPLATE_ACTIVATE}" ]; then
-  push_command+=" --activate=${CODER_TEMPLATE_ACTIVATE}"
+# Add activate flag to the push command if it is false
+if [ "${CODER_TEMPLATE_ACTIVATE}" = "false" ]; then
+  push_command+=" --activate=false"
 fi
 
 # Add confirmation flag to the push command
