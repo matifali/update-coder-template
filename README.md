@@ -11,7 +11,7 @@ Update coder templates automatically
 
 | Name                      | Description                                                              | Default                       |
 | ------------------------- | ------------------------------------------------------------------------ | ----------------------------- |
-| `CODER_ACCESS_URL`        | **Required** The url of coder deployment (e.g. <https://dev.coder.com>). | -                             |
+| `CODER_URL`               | **Required** The url of coder deployment (e.g. <https://dev.coder.com>). | -                             |
 | `CODER_SESSION_TOKEN`     | **Required** The session token of coder.                                 | `secrets.CODER_SESSION_TOKEN` |
 | `CODER_TEMPLATE_NAME`     | **Required** The name of template.                                       | -                             |
 | `CODER_TEMPLATE_DIR`      | The directory of template.                                               | `CODER_TEMPLATE_NAME`         |
@@ -45,7 +45,7 @@ Update coder templates automatically
                with:
                    CODER_TEMPLATE_NAME: "my-template"
                    CODER_TEMPLATE_DIR: "my-template"
-                   CODER_ACCESS_URL: "https://coder.example.com"
+                   CODER_URL: "https://coder.example.com"
                    CODER_TEMPLATE_VERSION: "${{ steps.latest_commit.outputs.hash }}"
                    CODER_SESSION_TOKEN: ${{ secrets.CODER_SESSION_TOKEN }}
    ```
@@ -72,7 +72,7 @@ Update coder templates automatically
                with:
                    CODER_TEMPLATE_NAME: "my-template"
                    CODER_TEMPLATE_DIR: "my-template"
-                   CODER_ACCESS_URL: "https://coder.example.com"
+                   CODER_URL: "https://coder.example.com"
                    CODER_TEMPLATE_ACTIVATE: "false"
                    CODER_SESSION_TOKEN: ${{ secrets.CODER_SESSION_TOKEN }}
    ```
