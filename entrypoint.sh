@@ -15,7 +15,7 @@ CODER_TEMPLATE_DIR=${CODER_TEMPLATE_DIR:-$CODER_TEMPLATE_NAME}
 echo "CODER_TEMPLATE_DIR is set to ${CODER_TEMPLATE_DIR}"
 
 # Construct push command
-push_command="coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR}" --url ${CODER_URL} --token ${CODER_SESSION_TOKEN}
+push_command="coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR}"
 
 # Add version to the push command if specified
 if [ -n "${CODER_TEMPLATE_VERSION}" ]; then
