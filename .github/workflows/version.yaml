@@ -3,6 +3,11 @@ name: Keep the versions up-to-date
 on:
   release:
     types: [published, edited]
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Release"]
+    types:
+      - completed
 
 permissions:
   contents: write

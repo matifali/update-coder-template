@@ -1,12 +1,12 @@
 #!/bin/bash -l
-set -e
+set -euo pipefail
 
 # Check if required variables are set
 : "${CODER_SESSION_TOKEN:?Variable not set or empty}"
 echo "CODER_SESSION_TOKEN is set."
 
 : "${CODER_ACCESS_URL:?Variable not set or empty}"
-echo "CODER_ACCESS_URL is set."
+echo "CODER_ACCESS_URL: ${CODER_ACCESS_URL}"
 
 echo "Pushing ${CODER_TEMPLATE_NAME} to ${CODER_ACCESS_URL}..."
 
