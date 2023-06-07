@@ -13,4 +13,4 @@ jobs:
       - name: update coder template
         run: gh release create ${{ github.ref }} -t ${{ github.ref_name }} --generate-notes -R ${{ github.repository }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
