@@ -6,7 +6,7 @@ Update coder templates automatically
 
 1. Create a GitHub secret named `CODER_SESSION_TOKEN` with your coder session token
 2. Create a `.github/workflows/push-coder-template.yaml` file and use one of the examples below.
-3. 
+
 ## Inputs
 
 | Name                      | Description                                                              | Default                       |
