@@ -10,7 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: update coder template
+      # Get the version tag
+      - name: Get version
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+      # Create a pre release if tag name has alpha or beta
+      - name: Create pre release
+        if: contains(steps.get_version.outputs.VERSION, 'alpha') || contains(steps.get_version.outputs.VERSION, 'beta')
+        run: gh release create ${{ github.ref }} -t ${{ github.ref_name }} --prerelease --generate-notes -R ${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+      - name: craete release
+        if: !contains(steps.get_version.outputs.VERSION , 'alpha') && !contains(steps.get_version.outputs.VERSION, 'beta')
         run: gh release create ${{ github.ref }} -t ${{ github.ref_name }} --generate-notes -R ${{ github.repository }}
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
