@@ -8,10 +8,8 @@ echo "CODER_SESSION_TOKEN is set."
 echo "CODER_URL is set."
 : "${CODER_TEMPLATE_ID:?CODER_TEMPLATE_ID not set or empty}"
 echo "CODER_TEMPLATE_ID: ${CODER_TEMPLATE_ID}"
-
-# Set default values if variables are empty
-CODER_TEMPLATE_DIR=${CODER_TEMPLATE_DIR:-$CODER_TEMPLATE_ID}
-echo "CODER_TEMPLATE_DIR is set to ${CODER_TEMPLATE_DIR}"
+: "${CODER_TEMPLATE_DIR:?CODER_TEMPLATE_DIR not set or empty}"
+echo "CODER_TEMPLATE_DIR: ${CODER_TEMPLATE_DIR}"
 
 # Construct push command
 push_command="coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR}" --message ${CODER_TEMPLATE_MESSAGE}
