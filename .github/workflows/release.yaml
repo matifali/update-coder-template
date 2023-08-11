@@ -17,21 +17,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-        # Get the version tag
-      - name: Get version
-        id: get_version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+        # check if tag name has alpha or beta
+      - name: Check if tag name has alpha or beta
+        id: check_tag_name
+        run: |
+          if [[ ${{ github.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+-(alpha|beta)\.[0-9]+$ ]]; then
+            echo "PRE_RELEASE=true" >> $GITHUB_ENV
+          else
+            echo "PRE_RELEASE=false" >> $GITHUB_ENV
+          fi
 
         # Create a pre release if tag name has alpha or beta
       - name: Create pre release
-        if: contains(steps.get_version.outputs.VERSION , 'alpha') || contains(steps.get_version.outputs.VERSION, 'beta')
+        if: steps.check_tag_name.outputs.PRE_RELEASE == 'true'
         run: gh release create ${{ github.ref }} -t ${{ github.ref_name }} --prerelease --generate-notes -R ${{ github.repository }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         # Create release
       - name: Create release
-        if: !contains(steps.get_version.outputs.VERSION , 'alpha') && !contains(steps.get_version.outputs.VERSION, 'beta')
+        if: steps.check_tag_name.outputs.PRE_RELEASE == 'false'
         run: gh release create ${{ github.ref }} -t ${{ github.ref_name }} --generate-notes -R ${{ github.repository }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
