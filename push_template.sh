@@ -16,7 +16,7 @@ push_command="coder templates push ${CODER_TEMPLATE_ID} --directory ./${CODER_TE
 
 # Add message to the push command if specified
 if [ -n "${CODER_TEMPLATE_MESSAGE}" ]; then
-  push_command+=" --message "${CODER_TEMPLATE_MESSAGE}""
+  push_command+=" --message \"${CODER_TEMPLATE_MESSAGE}\""
 fi
 
 # Append --create flag to the push command if CODER_TEMPLATE_CREATE is true
