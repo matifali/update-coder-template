@@ -43,7 +43,7 @@ runs:
       env:
         CODER_URL: ${{ inputs.url }}
 
-    - run: push_template.sh
+    - run: ${{ github.action_path }}/push_template.sh
       shell: bash
       env:
         CODER_SESSION_TOKEN: ${{ inputs.coder_session_token }}
