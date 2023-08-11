@@ -54,4 +54,3 @@ runs:
         CODER_TEMPLATE_ACTIVATE: ${{ inputs.activate }}
         CODER_TEMPLATE_MESSAGE: ${{ inputs.message }}
         CODER_TEMPLATE_CREATE: ${{ inputs.create }}
-
