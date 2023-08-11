@@ -12,7 +12,7 @@ echo "CODER_TEMPLATE_ID: ${CODER_TEMPLATE_ID}"
 echo "CODER_TEMPLATE_DIR: ${CODER_TEMPLATE_DIR}"
 
 # Construct push command
-push_command="coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR}" --message ${CODER_TEMPLATE_MESSAGE}
+push_command="coder templates push ${CODER_TEMPLATE_ID} --directory ./${CODER_TEMPLATE_DIR}" --message ${CODER_TEMPLATE_MESSAGE}
 
 # Append --create flag to the push command if CODER_TEMPLATE_CREATE is true
 if [ "${CODER_TEMPLATE_CREATE}" = "true" ]; then
