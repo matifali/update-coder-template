@@ -34,6 +34,10 @@ inputs:
     description: "Creates a new template if it does not exist"
     required: false
     default: "true"
+  dry_run:
+    description: "Dry run"
+    required: false
+    default: "true" # make it false after testing TODO
 
 runs:
   using: "composite"
@@ -54,3 +58,4 @@ runs:
         CODER_TEMPLATE_ACTIVATE: ${{ inputs.activate }}
         CODER_TEMPLATE_MESSAGE: ${{ inputs.message }}
         CODER_TEMPLATE_CREATE: ${{ inputs.create }}
+        CODER_TEMPLATE_DRY_RUN: ${{ inputs.dry_run }}

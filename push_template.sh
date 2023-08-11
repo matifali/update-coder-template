@@ -38,7 +38,13 @@ fi
 # Add confirmation flag to the push command
 push_command+=" --yes"
 
-# Execute the push command
-${push_command}
-
+# Execute the push command if no dry run
+if [ "${CODER_TEMPLATE_DRY_RUN}" = "false" ]; then
+  echo "Pushing ${CODER_TEMPLATE_DIR} to ${CODER_URL}..."
+  eval ${push_command}
+  echo "A new version of ${CODER_TEMPLATE_DIR} is pushed to ${CODER_URL} successfully."
+  exit 0
+fi
+echo "Dry run is enabled. The following command will be executed:"
+echo ${push_command}
 echo "A new version of ${CODER_TEMPLATE_DIR} is pushed to ${CODER_URL} successfully."
