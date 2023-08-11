@@ -18,9 +18,9 @@ jobs:
         run: |
           set -euo pipefail
           if [[ "${{ github.ref }}" =~ -(alpha|beta)- ]]; then
-            echo "PRE_RELEASE=true" >> $GITHUB_ENV
+            echo "PRE_RELEASE=true" >> $GITHUB_OUTPUT
           else
-            echo "PRE_RELEASE=false" >> $GITHUB_ENV
+            echo "PRE_RELEASE=false" >> $GITHUB_OUTPUT
           fi
 
         # Create a pre release if tag name has alpha or beta
