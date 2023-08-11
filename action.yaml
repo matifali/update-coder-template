@@ -36,20 +36,22 @@ inputs:
     default: "true"
 
 runs:
-  using: composite
-  env:
-    CODER_SESSION_TOKEN: ${{ inputs.coder_session_token }}
-    CODER_URL: ${{ inputs.url }}
-    CODER_TEMPLATE_ID: ${{ inputs.id }}
-    CODER_TEMPLATE_DIR: ${{ inputs.dir }}
-    CODER_TEMPLATE_VERSION_NAME: ${{ inputs.name }}
-    CODER_TEMPLATE_ACTIVATE: ${{ inputs.activate }}
-    CODER_TEMPLATE_MESSAGE: ${{ inputs.message }}
-    CODER_TEMPLATE_CREATE: ${{ inputs.create }}
+  using: "composite"
   steps:
     - run: curl -fsSL $CODER_URL/bin/coder-linux-amd64 -o /usr/local/bin/coder && chmod +x /usr/local/bin/coder
       shell: bash
+      env:
+        CODER_URL: ${{ inputs.url }}
 
     - run: push_template.sh
       shell: bash
+      env:
+        CODER_SESSION_TOKEN: ${{ inputs.coder_session_token }}
+        CODER_URL: ${{ inputs.url }}
+        CODER_TEMPLATE_ID: ${{ inputs.id }}
+        CODER_TEMPLATE_DIR: ${{ inputs.dir }}
+        CODER_TEMPLATE_VERSION_NAME: ${{ inputs.name }}
+        CODER_TEMPLATE_ACTIVATE: ${{ inputs.activate }}
+        CODER_TEMPLATE_MESSAGE: ${{ inputs.message }}
+        CODER_TEMPLATE_CREATE: ${{ inputs.create }}
 
