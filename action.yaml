@@ -34,6 +34,10 @@ inputs:
     description: "Creates a new template if it does not exist"
     required: false
     default: "true"
+  dry_run:
+    description: "Dry run"
+    required: false
+    default: "false"
 
 runs:
   using: "composite"
@@ -43,7 +47,7 @@ runs:
       env:
         CODER_URL: ${{ inputs.url }}
 
-    - run: push_template.sh
+    - run: ${{ github.action_path }}/push_template.sh
       shell: bash
       env:
         CODER_SESSION_TOKEN: ${{ inputs.coder_session_token }}
@@ -54,4 +58,4 @@ runs:
         CODER_TEMPLATE_ACTIVATE: ${{ inputs.activate }}
         CODER_TEMPLATE_MESSAGE: ${{ inputs.message }}
         CODER_TEMPLATE_CREATE: ${{ inputs.create }}
-
+        CODER_TEMPLATE_DRY_RUN: ${{ inputs.dry_run }}

@@ -12,7 +12,12 @@ echo "CODER_TEMPLATE_ID: ${CODER_TEMPLATE_ID}"
 echo "CODER_TEMPLATE_DIR: ${CODER_TEMPLATE_DIR}"
 
 # Construct push command
-push_command="coder templates push ${CODER_TEMPLATE_NAME} --directory ./${CODER_TEMPLATE_DIR}" --message ${CODER_TEMPLATE_MESSAGE}
+push_command="coder templates push ${CODER_TEMPLATE_ID} --directory ./${CODER_TEMPLATE_DIR}"
+
+# Add message to the push command if specified
+if [ -n "${CODER_TEMPLATE_MESSAGE}" ]; then
+  push_command+=" --message \"${CODER_TEMPLATE_MESSAGE}\""
+fi
 
 # Append --create flag to the push command if CODER_TEMPLATE_CREATE is true
 if [ "${CODER_TEMPLATE_CREATE}" = "true" ]; then
@@ -32,7 +37,13 @@ fi
 # Add confirmation flag to the push command
 push_command+=" --yes"
 
-# Execute the push command
-${push_command}
-
+# Execute the push command if no dry run
+if [ "${CODER_TEMPLATE_DRY_RUN}" = "false" ]; then
+  echo "Pushing ${CODER_TEMPLATE_DIR} to ${CODER_URL}..."
+  eval ${push_command}
+  echo "A new version of ${CODER_TEMPLATE_DIR} is pushed to ${CODER_URL} successfully."
+  exit 0
+fi
+echo "Dry run is enabled. The following command will be executed:"
+echo ${push_command}
 echo "A new version of ${CODER_TEMPLATE_DIR} is pushed to ${CODER_URL} successfully."

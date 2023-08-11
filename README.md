@@ -25,6 +25,7 @@ Update coder templates automatically
 | `activate`                | Activate the new template version.                                       | `true`                      |
 | `create`                  | Creates a new template if it does not exist                              | `true`                      |
 | `message`                 | Update message (similar to commit messages)                              | -                           |
+| `dry_run`                 | Dry run mode.                                                            | `false`                     |
 
 ## Examples
 
