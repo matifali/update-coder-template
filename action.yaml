@@ -6,36 +6,50 @@ branding:
   icon: arrow-up-circle
   color: green
 
-# specify the inputs that this action accepts
 inputs:
-  CODER_TEMPLATE_NAME:
-    description: "Template name"
+  id:
+    description: "Template identifier (e.g. my-template)"
     required: true
-  CODER_URL:
+  url:
     description: "Coder access URL (e.g. https://coder.example.com)"
     required: true
-  CODER_SESSION_TOKEN:
+  coder_session_token:
     description: "Coder session token"
     required: true
-  CODER_TEMPLATE_DIR:
+  dir:
     description: "Template directory name (path to the directory containing the main.tf file default: TEMPLATE_NAME)"
     required: false
-  CODER_TEMPLATE_VERSION:
-    description: "Template version"
+  name:
+    description: "Template version name (e.g. v1.0.0, commit hash, etc.), should be unique, default: a random string"
     required: false
-  CODER_TEMPLATE_ACTIVATE:
-    description: "Makes the current template active"
+  activate:
+    description: "Marks the current template version as active"
+    required: false
+    default: "true"
+  message:
+    description: "update message"
+    required: false
+    default: "Updated via update-coder-template action"
+  create:
+    description: "Creates a new template if it does not exist"
     required: false
     default: "true"
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 runs:
-  using: "docker"
-  image: "Dockerfile"
+  using: composite
   env:
-    CODER_SESSION_TOKEN: ${{ inputs.CODER_SESSION_TOKEN }}
-    CODER_URL: ${{ inputs.CODER_URL }}
-    CODER_TEMPLATE_NAME: ${{ inputs.CODER_TEMPLATE_NAME }}
-    CODER_TEMPLATE_DIR: ${{ inputs.CODER_TEMPLATE_DIR }}
-    CODER_TEMPLATE_VERSION: ${{ inputs.CODER_TEMPLATE_VERSION }}
-    CODER_TEMPLATE_ACTIVATE: ${{ inputs.CODER_TEMPLATE_ACTIVATE }}
+    CODER_SESSION_TOKEN: ${{ inputs.coder_session_token }}
+    CODER_URL: ${{ inputs.url }}
+    CODER_TEMPLATE_ID: ${{ inputs.id }}
+    CODER_TEMPLATE_DIR: ${{ inputs.dir }}
+    CODER_TEMPLATE_VERSION_NAME: ${{ inputs.name }}
+    CODER_TEMPLATE_ACTIVATE: ${{ inputs.activate }}
+    CODER_TEMPLATE_MESSAGE: ${{ inputs.message }}
+    CODER_TEMPLATE_CREATE: ${{ inputs.create }}
+  steps:
+    - run: curl -fsSL $CODER_URL/bin/coder-linux-amd64 -o /usr/local/bin/coder && chmod +x /usr/local/bin/coder
+      shell: bash
+
+    - run: push_template.sh
+      shell: bash
+
