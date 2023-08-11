@@ -41,7 +41,7 @@ Update coder templates automatically
              run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
 
            - name: Update Coder Template
-               uses: matifali/update-coder-template@latest
+               uses: matifali/update-coder-template@v2
                with:
                    CODER_TEMPLATE_NAME: "my-template"
                    CODER_TEMPLATE_DIR: "my-template"
@@ -68,7 +68,7 @@ Update coder templates automatically
              uses: actions/checkout@v3
 
            - name: Update Coder Template
-               uses: matifali/update-coder-template@latest
+               uses: matifali/update-coder-template@v2
                with:
                    CODER_TEMPLATE_NAME: "my-template"
                    CODER_TEMPLATE_DIR: "my-template"
