@@ -37,7 +37,7 @@ inputs:
   dry_run:
     description: "Dry run"
     required: false
-    default: "false"
+    default: "true"
 
 runs:
   using: "composite"
