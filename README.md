@@ -50,7 +50,7 @@ Update coder templates automatically
              run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
            - name: Get commit title
               id: commit_title
-              run: echo "title=$(git log -1 --pretty=%B)" >> $GITHUB_OUTPUT
+              run: echo "title=$(git log -1 --pretty=%s)" >> $GITHUB_OUTPUT
 
 
            - name: Update Coder Template
