@@ -50,17 +50,17 @@ Update coder templates automatically
              run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
            - name: Get commit title
               id: commit_title
-              run: echo "title=$(git log -1 --pretty=%B)" >> $GITHUB_OUTPUT
+              run: echo "title=$(git log -1 --pretty=%s)" >> $GITHUB_OUTPUT
 
 
            - name: Update Coder Template
                uses: matifali/update-coder-template@v3
                with:
-                   id: "my-template"
-                   dir: "my-template"
-                   url: "https://coder.example.com"
-                   name: "${{ steps.latest_commit.outputs.hash }}"
-                   message: "${{ steps.commit_title.outputs.title }}"
+                   id: my-template
+                   dir: my-template
+                   url: https://coder.example.com
+                   name: ${{ steps.latest_commit.outputs.hash }}
+                   message: ${{ steps.commit_title.outputs.title }}
                    coder_session_token: ${{ secrets.CODER_SESSION_TOKEN }}
    ```
 
@@ -84,9 +84,9 @@ Update coder templates automatically
            - name: Update Coder Template
                uses: matifali/update-coder-template@v3
                with:
-                   id: "my-template"
-                   dir: "my-template"
-                   url: "https://coder.example.com"
-                   activate: "false"
+                   id: my-template
+                   dir: my-template
+                   url: https://coder.example.com
+                   activate: false
                    coder_session_token: ${{ secrets.CODER_SESSION_TOKEN }}
    ```
