@@ -19,11 +19,6 @@ if [ -n "${CODER_TEMPLATE_MESSAGE}" ]; then
   push_command+=" --message \"${CODER_TEMPLATE_MESSAGE}\""
 fi
 
-# Append --create flag to the push command if CODER_TEMPLATE_CREATE is true
-if [ "${CODER_TEMPLATE_CREATE}" = "true" ]; then
-  push_command+=" --create"
-fi
-
 # Add version to the push command if specified
 if [ -n "${CODER_TEMPLATE_VERSION_NAME}" ]; then
   push_command+=" --name ${CODER_TEMPLATE_VERSION_NAME}"
