@@ -39,30 +39,30 @@ Update coder templates automatically
          - main
 
    jobs:
-       update:
-           runs-on: ubuntu-latest
-           steps:
-           - name: Checkout
-             uses: actions/checkout@v3
-           - name: Get latest commit hash
-             id: latest_commit
-             run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-           - name: Get commit title
-              id: commit_title
-              run: echo "title=$(git log -1 --pretty=%s)" >> $GITHUB_OUTPUT
+     update:
+       runs-on: ubuntu-latest
+       steps:
+         - name: Checkout
+           uses: actions/checkout@v4
 
+         - name: Get latest commit hash
+           id: latest_commit
+           run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-           - name: Update Coder Template
-               uses: matifali/update-coder-template@v3
-               with:
-                   id: my-template
-                   dir: my-template
-                   url: https://coder.example.com
-                   name: ${{ steps.latest_commit.outputs.hash }}
-                   message: ${{ steps.commit_title.outputs.title }}
-                   coder_session_token: ${{ secrets.CODER_SESSION_TOKEN }}
+         - name: Get commit title
+           id: commit_title
+           run: echo "title=$(git log -1 --pretty=%s)" >> $GITHUB_OUTPUT
+
+         - name: Update Coder Template
+           uses: matifali/update-coder-template@v3
+           with:
+             id: my-template
+             dir: my-template
+             url: https://coder.example.com
+             name: ${{ steps.latest_commit.outputs.hash }}
+             message: ${{ steps.commit_title.outputs.title }}
+             coder_session_token: ${{ secrets.CODER_SESSION_TOKEN }}
    ```
-
 2. Update a Coder template with a random version name without activating.
 
    ```yaml
@@ -74,18 +74,18 @@ Update coder templates automatically
          - main
 
    jobs:
-       update:
-           runs-on: ubuntu-latest
-           steps:
-           - name: Checkout
-             uses: actions/checkout@v3
+     update:
+       runs-on: ubuntu-latest
+       steps:
+         - name: Checkout
+           uses: actions/checkout@v4
 
-           - name: Update Coder Template
-               uses: matifali/update-coder-template@v3
-               with:
-                   id: my-template
-                   dir: my-template
-                   url: https://coder.example.com
-                   activate: false
-                   coder_session_token: ${{ secrets.CODER_SESSION_TOKEN }}
+         - name: Update Coder Template
+           uses: matifali/update-coder-template@v3
+           with:
+             id: my-template
+             dir: my-template
+             url: https://coder.example.com
+             activate: false
+             coder_session_token: ${{ secrets.CODER_SESSION_TOKEN }}
    ```
