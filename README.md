@@ -4,6 +4,9 @@ Update coder templates automatically
 
 ## Usage
 
+> [!NOTE]
+> Please also check the offical Coder [`setup-action`](https://github.com/coder/setup-action) action. 
+
 1. Create a GitHub secret named `CODER_SESSION_TOKEN` with your coder session token
    You can generate a long lived session token by running the following command in your browser console while logged into Coder with a **Template Admin** or **Owner** role.
 
