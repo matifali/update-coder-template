@@ -21,7 +21,7 @@ fi
 
 # Add provisioner tag to the push command if specified
 if [ -n "${CODER_PROVISIONER_TAG}" ]; then
-  push_command+=" --provisioner-tag \"${CODER_PROVISIONER_TAG}\""
+  push_command+=" --provisioner-tag=\"${CODER_PROVISIONER_TAG}\""
 fi
 
 # Add version to the push command if specified
@@ -32,6 +32,10 @@ fi
 # Add activate flag to the push command if it is false
 if [ "${CODER_TEMPLATE_ACTIVATE}" = "false" ]; then
   push_command+=" --activate=false"
+fi
+
+if [ "${CODER_IGNORE_LOCKFILE}" = "true" ]; then
+  push_command+=" --ignore-lockfile"
 fi
 
 # Add confirmation flag to the push command

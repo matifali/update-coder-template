@@ -38,6 +38,10 @@ inputs:
     description: "Dry run"
     required: false
     default: "false"
+  ignore_lockfile:
+    description: "Ignore warnings about not having a .terraform.lock.hcl file present in the template."
+    required: false
+    default: "false"
 
 runs:
   using: "composite"
@@ -59,3 +63,4 @@ runs:
         CODER_TEMPLATE_MESSAGE: ${{ inputs.message }}
         CODER_TEMPLATE_DRY_RUN: ${{ inputs.dry_run }}
         CODER_PROVISIONER_TAG: ${{ inputs.provisioner_tag }}
+        CODER_IGNORE_LOCKFILE: ${{ inputs.ignore_lockfile }}
