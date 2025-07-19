@@ -35,7 +35,7 @@ if [ "${CODER_TEMPLATE_ACTIVATE}" = "false" ]; then
 fi
 
 if [ "${CODER_IGNORE_LOCKFILE}" = "true" ]; then
-  push_command+=" --ignore-lockfile"
+  push_command+=" --ignore-lockfile=true"
 fi
 
 # Add confirmation flag to the push command
