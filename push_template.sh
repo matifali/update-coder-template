@@ -19,6 +19,11 @@ if [ -n "${CODER_TEMPLATE_MESSAGE}" ]; then
   push_command+=" --message \"${CODER_TEMPLATE_MESSAGE}\""
 fi
 
+# Add provisioner tag to the push command if specified
+if [ -n "${CODER_PROVISIONER_TAG}" ]; then
+  push_command+=" --provisioner-tag \"${CODER_PROVISIONER_TAG}\""
+fi
+
 # Add version to the push command if specified
 if [ -n "${CODER_TEMPLATE_VERSION_NAME}" ]; then
   push_command+=" --name ${CODER_TEMPLATE_VERSION_NAME}"
