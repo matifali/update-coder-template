@@ -34,6 +34,10 @@ inputs:
     description: "update message"
     required: false
     default: "Updated via update-coder-template action"
+  organization:
+    description: "organization name"
+    required: false
+    default: ""
   dry_run:
     description: "Dry run"
     required: false
@@ -64,3 +68,4 @@ runs:
         CODER_TEMPLATE_DRY_RUN: ${{ inputs.dry_run }}
         CODER_PROVISIONER_TAG: ${{ inputs.provisioner_tag }}
         CODER_IGNORE_LOCKFILE: ${{ inputs.ignore_lockfile }}
+        CODER_TEMPLATE_ORGANIZATION: ${{ inputs.organization }}
