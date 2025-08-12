@@ -30,6 +30,10 @@ inputs:
     description: "update message"
     required: false
     default: "Updated via update-coder-template action"
+  organization:
+    description: "organization name"
+    required: false
+    default: ""
   dry_run:
     description: "Dry run"
     required: false
@@ -54,3 +58,4 @@ runs:
         CODER_TEMPLATE_ACTIVATE: ${{ inputs.activate }}
         CODER_TEMPLATE_MESSAGE: ${{ inputs.message }}
         CODER_TEMPLATE_DRY_RUN: ${{ inputs.dry_run }}
+        CODER_TEMPLATE_ORGANIZATION: ${{ inputs.organization }}

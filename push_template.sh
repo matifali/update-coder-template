@@ -19,6 +19,11 @@ if [ -n "${CODER_TEMPLATE_MESSAGE}" ]; then
   push_command+=" --message \"${CODER_TEMPLATE_MESSAGE}\""
 fi
 
+# Add organization to the push command if specified
+if [ -n "${CODER_TEMPLATE_ORGANIZATION}" ]; then
+  push_command+=" --org \"${CODER_TEMPLATE_ORGANIZATION}\""
+fi
+
 # Add version to the push command if specified
 if [ -n "${CODER_TEMPLATE_VERSION_NAME}" ]; then
   push_command+=" --name ${CODER_TEMPLATE_VERSION_NAME}"
