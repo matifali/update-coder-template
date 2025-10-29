@@ -26,12 +26,24 @@ inputs:
     description: "Marks the current template version as active"
     required: false
     default: "true"
+  provisioner_tag:
+    description: "Add provisioner tag to the template, useful for identifying the template version in the Coder UI"
+    required: false
+    default: "-"
   message:
     description: "update message"
     required: false
     default: "Updated via update-coder-template action"
+  organization:
+    description: "organization name"
+    required: false
+    default: ""
   dry_run:
     description: "Dry run"
+    required: false
+    default: "false"
+  ignore_lockfile:
+    description: "Ignore warnings about not having a .terraform.lock.hcl file present in the template."
     required: false
     default: "false"
 
@@ -54,3 +66,6 @@ runs:
         CODER_TEMPLATE_ACTIVATE: ${{ inputs.activate }}
         CODER_TEMPLATE_MESSAGE: ${{ inputs.message }}
         CODER_TEMPLATE_DRY_RUN: ${{ inputs.dry_run }}
+        CODER_PROVISIONER_TAG: ${{ inputs.provisioner_tag }}
+        CODER_IGNORE_LOCKFILE: ${{ inputs.ignore_lockfile }}
+        CODER_TEMPLATE_ORGANIZATION: ${{ inputs.organization }}
